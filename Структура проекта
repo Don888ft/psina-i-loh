@@ -1,0 +1,14 @@
+psina-i-loh/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── config.js
+│   ├── sprites.js
+│   ├── player.js
+│   ├── ball.js
+│   ├── kargalyga.js
+│   ├── tournament.js
+│   ├── audio.js
+│   └── game.js
+└── README.md
