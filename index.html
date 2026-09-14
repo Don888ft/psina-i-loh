@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏀 Псина и Лох: Уличный Баскетбол</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <div id="ui">
+            <div id="scoreDisplay"></div>
+        </div>
+        
+        <div id="teamMenu" class="menu">
+            <h1>🏀 ПСИНА И ЛОХ 🏀</h1>
+            <h2>УЛИЧНЫЙ БАСКЕТБОЛ</h2>
+            <p>Выбери свою команду для турнира:</p>
+            <div class="team-select" id="teamSelect"></div>
+            <div class="controls-hint">
+                <p>🎮 Управление: WASD или Стрелки</p>
+                <p>🏀 Бросок: ПРОБЕЛ</p>
+            </div>
+        </div>
+        
+        <div id="winMenu" class="menu hidden">
+            <h1 id="winTitle">🏆 ПОБЕДА! 🏆</h1>
+            <div id="trophy">
+                <pre id="trophyArt"></pre>
+            </div>
+            <p id="winText"></p>
+            <button class="team-btn" id="playAgainBtn">ИГРАТЬ СНОВА</button>
+        </div>
+        
+        <div id="tournamentBracket" class="hidden">
+            <h3>ТУРНИРНАЯ СЕТКА</h3>
+            <div id="bracketDisplay"></div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/sprites.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/ball.js"></script>
+    <script src="js/kargalyga.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/tournament.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
