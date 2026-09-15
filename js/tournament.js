@@ -1,4 +1,4 @@
-// Управление турниром
+// Управление турниром (Исправленная и стабильная версия)
 class Tournament {
     constructor() {
         this.playerTeamIndex = 0;
@@ -15,15 +15,19 @@ class Tournament {
         
         // Создаём список противников (все команды кроме выбранной)
         this.opponents = [];
-        for (let i = 0; i < CONFIG.teams.length; i++) {
-            if (i !== playerTeamIndex) {
-                this.opponents.push(i);
+        if (typeof CONFIG !== 'undefined' && CONFIG.teams) {
+            for (let i = 0; i < CONFIG.teams.length; i++) {
+                if (i !== playerTeamIndex) {
+                    this.opponents.push(i);
+                }
             }
         }
         
         // Перемешиваем противников
         this.shuffleOpponents();
-        this.currentOpponentIndex = this.opponents[this.matchesPlayed];
+        if (this.opponents.length > 0) {
+            this.currentOpponentIndex = this.opponents[0];
+        }
     }
     
     shuffleOpponents() {
@@ -45,20 +49,23 @@ class Tournament {
     }
     
     getCurrentOpponent() {
-        return CONFIG.teams[this.currentOpponentIndex];
+        if (typeof CONFIG === 'undefined' || !CONFIG.teams) return { name: "Соперник", emoji: "🤖" };
+        const idx = this.opponents[this.matchesPlayed] ?? this.currentOpponentIndex;
+        return CONFIG.teams[idx] || CONFIG.teams[0];
     }
     
     getPlayerTeam() {
-        return CONFIG.teams[this.playerTeamIndex];
+        if (typeof CONFIG === 'undefined' || !CONFIG.teams) return { name: "Игрок", emoji: "🏀" };
+        return CONFIG.teams[this.playerTeamIndex] || CONFIG.teams[0];
     }
     
     getRemainingMatches() {
-        return this.opponents.length - this.matchesPlayed;
+        return Math.max(0, this.opponents.length - this.matchesPlayed);
     }
     
     updateBracketDisplay() {
         const display = document.getElementById('bracketDisplay');
-        if (!display) return;
+        if (!display || typeof CONFIG === 'undefined' || !CONFIG.teams) return;
         
         display.innerHTML = '';
         
@@ -73,7 +80,9 @@ class Tournament {
             }
             
             const team = CONFIG.teams[opponentIdx];
-            item.textContent = `${team.emoji} ${team.name}`;
+            if (team) {
+                item.textContent = `${team.emoji} ${team.name}`;
+            }
             display.appendChild(item);
         });
     }
